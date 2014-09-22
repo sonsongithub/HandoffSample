@@ -14,6 +14,23 @@
 
 @implementation AppDelegate
 
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)activityType {
+	NSLog(@"application:willContinueUserActivityWithType:");
+	if ([activityType isEqualToString:@"com.sonson.HandoffSample"])
+		return YES;
+	return NO;
+}
+
+- (void)application:(UIApplication *)application didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error {
+	NSLog(@"application:didFailToContinueUserActivityWithType:error:");
+	NSLog(@"%@", error);
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray *restorableObjects))restorationHandler {
+	NSLog(@"application:continueUserActivity:restorationHandler:");
+	restorationHandler(@[]);
+	return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
