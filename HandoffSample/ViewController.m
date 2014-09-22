@@ -8,15 +8,20 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
-
+@interface ViewController () {
+	NSUserActivity *_activity;
+}
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+	_activity = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.HandoffSample"];
+	_activity.webpageURL = [NSURL URLWithString:@"http://www.apple.com"];
+	_activity.title = @"Browsing";
+	[_activity becomeCurrent];
 }
 
 - (void)didReceiveMemoryWarning {
