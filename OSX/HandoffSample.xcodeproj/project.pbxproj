@@ -13,6 +13,7 @@
 		1482086E19D251BA003C3E94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1482086D19D251BA003C3E94 /* Images.xcassets */; };
 		1482087119D251BA003C3E94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1482086F19D251BA003C3E94 /* Main.storyboard */; };
 		1482087D19D251BA003C3E94 /* HandoffSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482087C19D251BA003C3E94 /* HandoffSampleTests.m */; };
+		1482088D19D27F70003C3E94 /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482088C19D27F70003C3E94 /* StreamController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		1482087619D251BA003C3E94 /* HandoffSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandoffSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1482087B19D251BA003C3E94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1482087C19D251BA003C3E94 /* HandoffSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HandoffSampleTests.m; sourceTree = "<group>"; };
+		1482088B19D27F70003C3E94 /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamController.h; path = ../../StreamController.h; sourceTree = "<group>"; };
+		1482088C19D27F70003C3E94 /* StreamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamController.m; path = ../../StreamController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,8 @@
 		1482086219D251BA003C3E94 /* HandoffSample */ = {
 			isa = PBXGroup;
 			children = (
+				1482088B19D27F70003C3E94 /* StreamController.h */,
+				1482088C19D27F70003C3E94 /* StreamController.m */,
 				1482086519D251BA003C3E94 /* AppDelegate.h */,
 				1482086619D251BA003C3E94 /* AppDelegate.m */,
 				1482086A19D251BA003C3E94 /* ViewController.h */,
@@ -216,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1482086C19D251BA003C3E94 /* ViewController.m in Sources */,
+				1482088D19D27F70003C3E94 /* StreamController.m in Sources */,
 				1482086919D251BA003C3E94 /* main.m in Sources */,
 				1482086719D251BA003C3E94 /* AppDelegate.m in Sources */,
 			);
@@ -331,10 +337,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: Yuichi Yoshida (AK9FYY958C)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HandoffSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "81f0d037-a047-4ad7-a935-fed481389c9d";
 			};
 			name = Debug;
 		};
@@ -342,10 +350,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer: Yuichi Yoshida (AK9FYY958C)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = HandoffSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "81f0d037-a047-4ad7-a935-fed481389c9d";
 			};
 			name = Release;
 		};
@@ -404,6 +414,7 @@
 				1482088219D251BA003C3E94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1482088319D251BA003C3E94 /* Build configuration list for PBXNativeTarget "HandoffSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +423,7 @@
 				1482088519D251BA003C3E94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -14,6 +14,8 @@
 		1437834F19D003DD005BBEBF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1437834E19D003DD005BBEBF /* Images.xcassets */; };
 		1437835219D003DD005BBEBF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1437835019D003DD005BBEBF /* LaunchScreen.xib */; };
 		1437835E19D003DD005BBEBF /* HandoffSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437835D19D003DD005BBEBF /* HandoffSampleTests.m */; };
+		1482088719D27CDF003C3E94 /* icon_512x512.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1482088619D27CDF003C3E94 /* icon_512x512.jpg */; };
+		1482088A19D27D91003C3E94 /* StreamController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1482088919D27D91003C3E94 /* StreamController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		1437835719D003DD005BBEBF /* HandoffSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandoffSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437835C19D003DD005BBEBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1437835D19D003DD005BBEBF /* HandoffSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HandoffSampleTests.m; sourceTree = "<group>"; };
+		1482088619D27CDF003C3E94 /* icon_512x512.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon_512x512.jpg; sourceTree = "<group>"; };
+		1482088819D27D91003C3E94 /* StreamController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamController.h; path = ../../StreamController.h; sourceTree = "<group>"; };
+		1482088919D27D91003C3E94 /* StreamController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamController.m; path = ../../StreamController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +86,9 @@
 		1437834019D003DC005BBEBF /* HandoffSample */ = {
 			isa = PBXGroup;
 			children = (
+				1482088819D27D91003C3E94 /* StreamController.h */,
+				1482088919D27D91003C3E94 /* StreamController.m */,
+				1482088619D27CDF003C3E94 /* icon_512x512.jpg */,
 				1437834519D003DC005BBEBF /* AppDelegate.h */,
 				1437834619D003DC005BBEBF /* AppDelegate.m */,
 				1437834819D003DC005BBEBF /* ViewController.h */,
@@ -202,6 +210,7 @@
 				1437834D19D003DC005BBEBF /* Main.storyboard in Resources */,
 				1437835219D003DD005BBEBF /* LaunchScreen.xib in Resources */,
 				1437834F19D003DD005BBEBF /* Images.xcassets in Resources */,
+				1482088719D27CDF003C3E94 /* icon_512x512.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1437834A19D003DC005BBEBF /* ViewController.m in Sources */,
+				1482088A19D27D91003C3E94 /* StreamController.m in Sources */,
 				1437834719D003DC005BBEBF /* AppDelegate.m in Sources */,
 				1437834419D003DC005BBEBF /* main.m in Sources */,
 			);
