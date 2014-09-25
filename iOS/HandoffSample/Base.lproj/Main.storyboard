@@ -15,8 +15,35 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-YM-nCB">
+                                <rect key="frame" x="275" y="485" width="51" height="30"/>
+                                <state key="normal" title="camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pusuButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Atx-EG-gfN"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2IM-V0-rAw">
+                                <rect key="frame" x="100" y="150" width="400" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="400" id="eTb-Cp-n7l"/>
+                                    <constraint firstAttribute="height" constant="300" id="p1d-wI-oxR"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dip-YM-nCB" firstAttribute="top" secondItem="2IM-V0-rAw" secondAttribute="bottom" constant="35" id="65W-Jo-bgZ"/>
+                            <constraint firstAttribute="centerY" secondItem="2IM-V0-rAw" secondAttribute="centerY" id="TXb-HC-dul"/>
+                            <constraint firstAttribute="centerX" secondItem="Dip-YM-nCB" secondAttribute="centerX" id="sfj-jI-3sU"/>
+                            <constraint firstAttribute="centerX" secondItem="2IM-V0-rAw" secondAttribute="centerX" id="z62-Tl-2ak"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="_imageView" destination="2IM-V0-rAw" id="6zZ-mr-Iv8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

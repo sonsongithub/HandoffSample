@@ -7,31 +7,57 @@
 //
 
 #import "ViewController.h"
-#import "StreamController.h"
 
-@interface ViewController () <NSUserActivityDelegate> {
-	StreamController *_streamController;
+@interface ViewController () <NSUserActivityDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	NSUserActivity *_activity;
 	NSUserActivity *_activityForOSX;
+	NSOutputStream *_outputStream;
+	NSData *_imageBinary;
+	IBOutlet UIImageView *_imageView;
 }
 @end
 
 @implementation ViewController
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+	UIImage *image = info[UIImagePickerControllerOriginalImage];
+	_imageView.image = image;
+	_imageBinary = UIImageJPEGRepresentation(image, 0.2);
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+	[picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)pusuButton:(id)sender {
+	UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+	picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+	picker.delegate = self;
+	[self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)check:(NSTimer*)timer {
+	if (_imageBinary) {
+		if (_activityForOSX == nil) {
+			_activityForOSX = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.OSX.HandoffSample"];
+			_activityForOSX.title = @"Browsing";
+			_activityForOSX.userInfo = @{@"ImageSize":@(_imageBinary.length)};
+			_activityForOSX.supportsContinuationStreams = YES;
+			_activityForOSX.delegate = self;
+			[_activityForOSX becomeCurrent];
+		}
+	}
+	else {
+		[_activityForOSX invalidate];
+		_activityForOSX.delegate = nil;
+		_activityForOSX = nil;
+	}
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-//	_activity = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.HandoffSample"];
-//	_activity.webpageURL = [NSURL URLWithString:@"http://www.apple.com"];
-//	_activity.title = @"Browsing";
-//	[_activity becomeCurrent];
-	
-	_activityForOSX = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.OSX.HandoffSample"];
-	_activityForOSX.title = @"Browsing";
-	_activityForOSX.userInfo = @{@"hoge":@"hoge"};
-	_activityForOSX.supportsContinuationStreams = YES;
-	_activityForOSX.delegate = self;
-	[_activityForOSX becomeCurrent];
+	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(check:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,11 +67,30 @@
 
 - (void)userActivity:(NSUserActivity *)userActivity didReceiveInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream {
 	NSLog(@"userActivity:didReceiveInputStream:outputStream:");
-	_streamController = [StreamController controllerWithInputStream:inputStream outputStream:outputStream];
-	unsigned char *p = (unsigned char*)malloc(sizeof(unsigned char) * 100);
-	NSData *data = [NSData dataWithBytes:p length:100];
-	[_streamController writeData:data];
-	free(p);
+	_outputStream = outputStream;
+	NSInteger dataSize = _imageBinary.length;
+	NSInteger sendSize = 0;
+	
+	[_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[_outputStream open];
+	
+	uint8_t *p = (uint8_t*)[_imageBinary bytes];
+	
+	while (1) {
+		NSInteger bytesToSend = (dataSize - sendSize) > 100 ? 100 : (dataSize - sendSize);
+		NSInteger result = [_outputStream write:p + sendSize maxLength:bytesToSend];
+		
+		if (result < 0) {
+			NSLog(@"Error - %ld", result);
+			break;
+		}
+		
+		sendSize += result;
+		if (sendSize >= dataSize)
+			break;
+		NSLog(@"%ld", sendSize);
+	}
+	_imageBinary = nil;
 }
 
 - (void)userActivityWasContinued:(NSUserActivity *)userActivity {

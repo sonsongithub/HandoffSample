@@ -14,6 +14,12 @@
 	[super viewDidLoad];
 
 	// Do any additional setup after loading the view.
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceive:) name:@"didReceive" object:nil];
+}
+
+- (void)didReceive:(NSNotification*)notification {
+	NSImage *image = notification.userInfo[@"image"];
+	_imageView.image = image;
 }
 
 - (void)setRepresentedObject:(id)representedObject {

@@ -10,7 +10,8 @@
 #import "StreamController.h"
 
 @interface AppDelegate () {
-	StreamController *_streamController;
+	NSInputStream *_outputStream;
+	NSInputStream *_inputStream;
 }
 @end
 
@@ -41,8 +42,38 @@
 	[userActivity getContinuationStreamsWithCompletionHandler:^(NSInputStream *inputStream, NSOutputStream *outputStream, NSError *error) {
 		NSLog(@"getContinuationStreamsWithCompletionHandler:");
 		if (error == nil) {
-			_streamController = [StreamController controllerWithInputStream:inputStream outputStream:outputStream];
-			[_streamController read];
+			NSNumber *num = userActivity.userInfo[@"ImageSize"];
+			NSInteger dataSize = num.integerValue;
+			_inputStream = inputStream;
+			_outputStream = outputStream;
+			
+			[_outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+			[_outputStream open];
+			[_inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+			[_inputStream open];
+			
+			NSInteger receivedBytes = 0;
+			NSInteger length = 256;
+			uint8_t buffer[length];
+			
+			NSMutableData *readData = [NSMutableData data];
+			
+			while (1) {
+				NSInteger bytesRead = [_inputStream read:buffer maxLength:length];
+				if (bytesRead <= 0)
+					break;
+				
+				[readData appendBytes:buffer length:bytesRead];
+				
+				receivedBytes += bytesRead;
+				
+				if (receivedBytes >= dataSize)
+					break;
+				
+				NSLog(@"%ld", receivedBytes);
+			}
+			NSImage *image = [[NSImage alloc] initWithData:readData];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"didReceive" object:nil userInfo:@{@"image":image}];
 		}
 		else {
 			NSLog(@"%@", [error localizedDescription]);
