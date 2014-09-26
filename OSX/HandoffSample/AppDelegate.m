@@ -73,6 +73,11 @@
 			}
 			NSImage *image = [[NSImage alloc] initWithData:readData];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"didReceive" object:nil userInfo:@{@"image":image}];
+			
+			[_outputStream close];
+			[_inputStream close];
+			_outputStream = nil;
+			_inputStream = nil;
 		}
 		else {
 			NSLog(@"%@", [error localizedDescription]);

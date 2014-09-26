@@ -10,7 +10,6 @@
 
 @interface ViewController () <NSUserActivityDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 	NSUserActivity *_activity;
-	NSUserActivity *_activityForOSX;
 	NSOutputStream *_outputStream;
 	NSData *_imageBinary;
 	IBOutlet UIImageView *_imageView;
@@ -23,6 +22,14 @@
 	UIImage *image = info[UIImagePickerControllerOriginalImage];
 	_imageView.image = image;
 	_imageBinary = UIImageJPEGRepresentation(image, 0.2);
+	
+	_activity = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.OSX.HandoffSample"];
+	_activity.title = @"Browsing";
+	_activity.supportsContinuationStreams = YES;
+	_activity.delegate = self;
+	_activity.userInfo = @{@"ImageSize":@(_imageBinary.length)};
+	
+	[_activity becomeCurrent];
 	[picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -39,25 +46,15 @@
 
 - (void)check:(NSTimer*)timer {
 	if (_imageBinary) {
-		if (_activityForOSX == nil) {
-			_activityForOSX = [[NSUserActivity alloc] initWithActivityType:@"com.sonson.OSX.HandoffSample"];
-			_activityForOSX.title = @"Browsing";
-			_activityForOSX.userInfo = @{@"ImageSize":@(_imageBinary.length)};
-			_activityForOSX.supportsContinuationStreams = YES;
-			_activityForOSX.delegate = self;
-			[_activityForOSX becomeCurrent];
-		}
 	}
 	else {
-		[_activityForOSX invalidate];
-		_activityForOSX.delegate = nil;
-		_activityForOSX = nil;
+		[_activity invalidate];
 	}
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(check:) userInfo:nil repeats:YES];
+	//[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(check:) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +88,10 @@
 		NSLog(@"%ld", sendSize);
 	}
 	_imageBinary = nil;
+	[_activity invalidate];
+	
+	[_outputStream close];
+	_outputStream = nil;
 }
 
 - (void)userActivityWasContinued:(NSUserActivity *)userActivity {
