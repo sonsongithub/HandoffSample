@@ -7,10 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "StreamController.h"
 
 @interface AppDelegate () {
-	NSInputStream *_outputStream;
+	NSOutputStream *_outputStream;
 	NSInputStream *_inputStream;
 }
 @end
