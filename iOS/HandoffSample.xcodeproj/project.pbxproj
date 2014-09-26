@@ -40,6 +40,7 @@
 		1437835719D003DD005BBEBF /* HandoffSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HandoffSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437835C19D003DD005BBEBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1437835D19D003DD005BBEBF /* HandoffSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HandoffSampleTests.m; sourceTree = "<group>"; };
+		1450744419D5AAF5006EBC14 /* HandoffSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HandoffSample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +82,7 @@
 		1437834019D003DC005BBEBF /* HandoffSample */ = {
 			isa = PBXGroup;
 			children = (
+				1450744419D5AAF5006EBC14 /* HandoffSample.entitlements */,
 				1437834519D003DC005BBEBF /* AppDelegate.h */,
 				1437834619D003DC005BBEBF /* AppDelegate.m */,
 				1437834819D003DC005BBEBF /* ViewController.h */,
@@ -168,6 +170,12 @@
 				TargetAttributes = {
 					1437833D19D003DC005BBEBF = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = JP866VWWSD;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1437835619D003DD005BBEBF = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -345,11 +353,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_ENTITLEMENTS = HandoffSample/HandoffSample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HandoffSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58d47927-ebb4-49c4-9fd8-96a268073d08";
+				PROVISIONING_PROFILE = "df18d80e-5711-4db2-8b77-fd1c9693d19b";
 			};
 			name = Debug;
 		};
@@ -357,11 +367,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				CODE_SIGN_ENTITLEMENTS = HandoffSample/HandoffSample.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = HandoffSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58d47927-ebb4-49c4-9fd8-96a268073d08";
+				PROVISIONING_PROFILE = "df18d80e-5711-4db2-8b77-fd1c9693d19b";
 			};
 			name = Release;
 		};
